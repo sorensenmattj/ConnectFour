@@ -14,6 +14,11 @@ namespace Connect4
 
         public int NumberOfRows => 6;
 
+        public char EmptyCellValue => ' ';
+
+        /// <summary>
+        /// Initialises a new instance of the <see cref="Board"/> class.
+        /// </summary>
         public Board()
         {
             State = new char[NumberOfRows, NumberOfColumns];
@@ -22,21 +27,30 @@ namespace Connect4
             {
                 for (int j = 0; j < NumberOfColumns; j++)
                 {
-                    State[i, j] = ' ';
+                    State[i, j] = EmptyCellValue;
                 }
             }
         }
 
+        /// <summary>
+        /// Adds a token to the lowest empty row in the specified column.
+        /// </summary>
+        /// <exception cref="InvalidOperationException">
+        /// Thrown if column is full when trying to add token.
+        /// </exception>
         public void AddTokenToColumn(char token, int columnIndex)
         {
-            for (int i = NumberOfRows; i >= 0; i--)
+            for (int i = NumberOfRows - 1; i >= 0; i--)
             {
-                if (State[i, columnIndex] == ' ')
+                if (State[i, columnIndex].Equals(EmptyCellValue))
                 {
                     State[i, columnIndex] = token;
-                    break;
+                    return;
                 }
             }
+
+            throw new InvalidOperationException(
+                "Cannot add token to full column.");
         }
     }
 }

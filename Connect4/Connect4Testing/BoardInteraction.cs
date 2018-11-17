@@ -1,5 +1,6 @@
 ﻿using Connect4;
 using NUnit.Framework;
+using System;
 
 namespace Connect4Testing
 {
@@ -45,21 +46,45 @@ namespace Connect4Testing
                 "Token at bottom of column not expected token.");
         }
 
-        [TestCase]
-        public void AddTwoTokensToSameColumn()
+        [TestCase(0)]
+        [TestCase(1)]
+        [TestCase(2)]
+        [TestCase(3)]
+        [TestCase(4)]
+        [TestCase(5)]
+        [TestCase(6)]
+        public void AddTwoTokensToSameColumn(int columnIndex)
         {
-            _board.AddTokenToColumn('X', 0);
-            _board.AddTokenToColumn('X', 0);
+            _board.AddTokenToColumn('X', columnIndex);
+            _board.AddTokenToColumn('X', columnIndex);
 
             Assert.AreEqual(
                 'X',
-                _board.State[5, 0],
+                _board.State[5, columnIndex],
                 "First token not placed in expected location.");
 
             Assert.AreEqual(
                 'X',
-                _board.State[4, 0],
+                _board.State[4, columnIndex],
                 "Second token not placed in expected location.");
+        }
+
+        [TestCase(0)]
+        [TestCase(1)]
+        [TestCase(2)]
+        [TestCase(3)]
+        [TestCase(4)]
+        [TestCase(5)]
+        [TestCase(6)]
+        public void TryAddSevenTokensToSameColumn(int columnIndex)
+        {
+            for (int i = 0; i < _board.NumberOfRows; i++)
+            {
+                _board.AddTokenToColumn('X', columnIndex);
+            }
+
+            Assert.Throws<InvalidOperationException>(
+                () => _board.AddTokenToColumn('X', columnIndex));
         }
     }
 }
