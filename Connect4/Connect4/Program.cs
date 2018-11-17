@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Connect4
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
         }
     }
