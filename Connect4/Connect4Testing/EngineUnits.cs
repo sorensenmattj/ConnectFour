@@ -74,5 +74,24 @@ namespace Connect4Testing
                 actualPromptBuilder.ToString(),
                 "Actual prompt does not match expected prompt.");
         }
+
+        [TestCase(0, 'X')]
+        [TestCase(1, 'O')]
+        [TestCase(2, 'X')]
+        [TestCase(3, 'O')]
+        public void CurrentPlayerToken(int turnsPlayed, char expectedToken)
+        {
+            for (int i = 0; i < turnsPlayed; i++)
+            {
+                _engine.Turn++;
+            }
+
+            var actualToken = _engine.CurrentToken;
+
+            Assert.AreEqual(
+                expectedToken,
+                actualToken,
+                "Actual current token does not match expected value.");
+        }
     }
 }

@@ -16,6 +16,8 @@ namespace Connect4
 
         public int MaxIndex => NumberOfColumns - 1;
 
+        public readonly char[] ValidTokens = { 'O', 'X' };
+
         /// <summary>
         /// Initialises a new instance of the <see cref="Board"/> class.
         /// </summary>

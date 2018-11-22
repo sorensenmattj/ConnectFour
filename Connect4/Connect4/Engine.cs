@@ -11,6 +11,11 @@ namespace Connect4
     {
         private Board _board { get; set; }
 
+        public char CurrentToken => 
+            _board.ValidTokens[Turn % _board.ValidTokens.Length];
+
+        public int Turn { get; set; }
+
         /// <summary>
         /// Initialise a new instance of the <see cref="Engine"/> class
         /// with the specified options.
@@ -18,6 +23,8 @@ namespace Connect4
         public Engine(Board board)
         {
             _board = board;
+
+            Turn = 1;
         }
 
         /// <summary>
