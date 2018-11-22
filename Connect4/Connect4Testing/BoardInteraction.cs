@@ -86,5 +86,26 @@ namespace Connect4Testing
             Assert.Throws<InvalidOperationException>(
                 () => _board.AddTokenToColumn('X', columnIndex));
         }
+
+        [TestCase]
+        public void ValidTokens()
+        {
+            char[] expectedValidTokens = { 'O', 'X' };
+
+            var actualValidTokens = _board.ValidTokens;
+
+            Assert.AreEqual(
+                expectedValidTokens.Length,
+                actualValidTokens.Length,
+                "Number of actual valid tokens does not match expected.");
+
+            for(int i = 0; i < expectedValidTokens.Length; i++)
+            {
+                Assert.AreEqual(
+                    expectedValidTokens[i],
+                    actualValidTokens[i],
+                    "Actual valid token does not match expected token.");
+            }
+        }
     }
 }
