@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Connect4
 {
@@ -32,7 +29,7 @@ namespace Connect4
         /// </summary>
         public int GetIndexFromUser(TextWriter writer, TextReader reader)
         {
-            writer.Write("Place token at index: ");
+            writer.Write($"Place {CurrentToken} at index: ");
             var input = reader.ReadLine();
 
             if (int.TryParse(input, out int index))
@@ -42,12 +39,81 @@ namespace Connect4
                     return -1;
                 }
 
+                Console.WriteLine();
                 return index;
             }
             else
             {
                 return -1;
             }
+        }
+
+        /// <summary>
+        /// Adds a token to the board at the given index.
+        /// </summary>
+        public void AddToken(char token, int index)
+        {
+            _board.AddTokenToColumn(token, index);
+        }
+
+        /// <summary>
+        /// Plays the game.
+        /// </summary>
+        public void Play()
+        {
+            while (Turn <= _board.NumberOfColumns * _board.NumberOfRows)
+            {
+                DisplayBoard();
+
+                while (true)
+                {
+                    int chosenIndex;
+
+                    do
+                    {
+                        chosenIndex = GetIndexFromUser(Console.Out, Console.In);
+                    }
+                    while (chosenIndex == -1);
+
+                    try
+                    {
+                         _board.AddTokenToColumn(CurrentToken, chosenIndex);
+                        break;
+                    }
+                    catch (InvalidOperationException ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
+                }
+
+                if (_board.HasPlayerWon(CurrentToken))
+                {
+                    DisplayBoard();
+
+                    Console.WriteLine($"Player {CurrentToken} has won!");
+                    return;
+                }
+
+                Turn++;
+            }
+        }
+
+        /// <summary>
+        /// Prints the board state to the console.
+        /// </summary>
+        private void DisplayBoard()
+        {
+            for (int row = 0; row < _board.NumberOfRows; row++)
+            {
+                for (int column = 0; column < _board.NumberOfColumns; column++)
+                {
+                    Console.Write($"{_board.State[row, column]}|");
+                }
+
+                Console.WriteLine();
+            }
+
+            Console.WriteLine("0 1 2 3 4 5 6\n");
         }
     }
 }

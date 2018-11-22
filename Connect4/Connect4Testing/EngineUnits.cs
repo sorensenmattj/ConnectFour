@@ -62,7 +62,7 @@ namespace Connect4Testing
         [TestCase]
         public void IndexInputPrompt()
         {
-            string expectedPrompt = "Place token at index: ";
+            string expectedPrompt = "Place X at index: ";
             var actualPromptBuilder = new StringBuilder();
             var writer = new StringWriter(actualPromptBuilder);
             var reader = new StringReader("1");

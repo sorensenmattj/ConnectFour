@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Connect4
 {
@@ -10,6 +6,12 @@ namespace Connect4
     {
         public static void Main(string[] args)
         {
+            var board = new Board();
+            var engine = new Engine(board);
+
+            engine.Play();
+
+            Console.Read();
         }
     }
 }

@@ -107,5 +107,81 @@ namespace Connect4Testing
                     "Actual valid token does not match expected token.");
             }
         }
+
+        [TestCase]
+        public void CheckPlayerHasWonVertically()
+        {
+            _board.AddTokenToColumn('X', 0);
+            _board.AddTokenToColumn('X', 0);
+            _board.AddTokenToColumn('X', 0);
+            _board.AddTokenToColumn('X', 0);
+
+            Assert.IsTrue(
+                _board.HasPlayerWon('X'),
+                "Player was expected to win but has not.");
+        }
+
+        [TestCase]
+        public void CheckPlayerHasWonHorizontally()
+        {
+            _board.AddTokenToColumn('X', 0);
+            _board.AddTokenToColumn('X', 1);
+            _board.AddTokenToColumn('X', 2);
+            _board.AddTokenToColumn('X', 3);
+
+            Assert.IsTrue(
+                _board.HasPlayerWon('X'),
+                "Player was expected to win but has not.");
+        }
+
+        [TestCase]
+        public void CheckPlayerHasWonDiagonallyUp()
+        {
+            _board.AddTokenToColumn('X', 0);
+            _board.AddTokenToColumn('O', 1);
+            _board.AddTokenToColumn('X', 1);
+            _board.AddTokenToColumn('O', 2);
+            _board.AddTokenToColumn('O', 2);
+            _board.AddTokenToColumn('X', 2);
+            _board.AddTokenToColumn('O', 3);
+            _board.AddTokenToColumn('O', 3);
+            _board.AddTokenToColumn('O', 3);
+            _board.AddTokenToColumn('X', 3);
+
+            Assert.IsTrue(
+                _board.HasPlayerWon('X'),
+                "Player was expected to have won but has not.");
+        }
+
+        [TestCase]
+        public void CheckPlayerHasWonDiagonallyDown()
+        {
+            _board.AddTokenToColumn('X', 6);
+            _board.AddTokenToColumn('O', 5);
+            _board.AddTokenToColumn('X', 5);
+            _board.AddTokenToColumn('O', 4);
+            _board.AddTokenToColumn('O', 4);
+            _board.AddTokenToColumn('X', 4);
+            _board.AddTokenToColumn('O', 3);
+            _board.AddTokenToColumn('O', 3);
+            _board.AddTokenToColumn('O', 3);
+            _board.AddTokenToColumn('X', 3);
+
+            Assert.IsTrue(
+                _board.HasPlayerWon('X'),
+                "Player was expected to have won but has not.");
+        }
+
+        [TestCase]
+        public void CheckPlayerHasNotWon()
+        {
+            _board.AddTokenToColumn('X', 0);
+            _board.AddTokenToColumn('X', 0);
+            _board.AddTokenToColumn('X', 0);
+
+            Assert.IsFalse(
+                _board.HasPlayerWon('X'),
+                "Player was expected to have not yet won by they have.");
+        }
     }
 }
