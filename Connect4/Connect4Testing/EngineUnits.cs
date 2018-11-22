@@ -58,5 +58,21 @@ namespace Connect4Testing
                 actualIndex,
                 $"Actual index does not equal {expectedIndex}");
         }
+
+        [TestCase]
+        public void IndexInputPrompt()
+        {
+            string expectedPrompt = "Place token at index: ";
+            var actualPromptBuilder = new StringBuilder();
+            var writer = new StringWriter(actualPromptBuilder);
+            var reader = new StringReader("1");
+
+            _engine.GetIndexFromUser(writer, reader);
+
+            Assert.AreEqual(
+                expectedPrompt,
+                actualPromptBuilder.ToString(),
+                "Actual prompt does not match expected prompt.");
+        }
     }
 }

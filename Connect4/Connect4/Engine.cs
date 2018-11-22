@@ -25,6 +25,7 @@ namespace Connect4
         /// </summary>
         public int GetIndexFromUser(TextWriter writer, TextReader reader)
         {
+            writer.Write("Place token at index: ");
             var input = reader.ReadLine();
 
             if (int.TryParse(input, out int index))
