@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Connect4
 {
@@ -15,6 +11,10 @@ namespace Connect4
         public int NumberOfRows => 6;
 
         public char EmptyCellValue => ' ';
+
+        public int MinIndex => 0;
+
+        public int MaxIndex => NumberOfColumns - 1;
 
         /// <summary>
         /// Initialises a new instance of the <see cref="Board"/> class.
